@@ -18,10 +18,10 @@ type Inputs = {
 };
 
 export default function ContactMe({ pageInfo }: Props) {
-  const { register, handleSubmit } = useForm<Inputs>();
+  const { register, handleSubmit, reset } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (formData) => {
     const id = toast.loading("Sending...");
-
+    reset();
     emailjs
       .send(
         process.env.EMAILJS_SERVICE_ID!,
