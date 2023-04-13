@@ -1,10 +1,12 @@
+import { sanityClient } from "@/sanity";
 import { Social } from "@/typings";
+import { groq } from "next-sanity";
+
+const query = groq`
+    *[_type == "social"]
+`;
 
 export const fetchSocials = async () => {
-  const res = await fetch(`https://${process.env.VERCEL_URL}:3000/api/getSocials`);
-
-  const data = await res.json();
-  const socials: Social[] = data.socials;
-
+  const socials: Social[] = await sanityClient.fetch(query);
   return socials;
 };

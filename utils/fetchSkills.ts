@@ -1,10 +1,12 @@
+import { sanityClient } from "@/sanity";
 import { Skill } from "@/typings";
+import { groq } from "next-sanity";
+
+const query = groq`
+    *[_type == "skill"]
+`;
 
 export const fetchSkills = async () => {
-  const res = await fetch(`https://${process.env.VERCEL_URL}:3000/api/getSkills`);
-
-  const data = await res.json();
-  const skills: Skill[] = data.skills;
-
+  const skills: Skill[] = await sanityClient.fetch(query);
   return skills;
 };
