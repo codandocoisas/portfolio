@@ -2,7 +2,7 @@ import { PageInfo } from "@/typings";
 
 export const fetchPageInfo = async () => {
   const res = await fetch(
-    `${process.env.VERCEL_URL}/api/getPageInfo`
+    `http://${process.env.VERCEL_URL}/api/getPageInfo`
   );
 
   const data = await res.json();
